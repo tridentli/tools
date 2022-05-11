@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"golang.org/x/crypto/openpgp"
+	"github.com/ProtonMail/go-crypto/openpgp"
 	pf "trident.li/pitchfork/lib"
 )
 
@@ -198,14 +198,14 @@ func main() {
 			}
 		}
 
-		// No changes?
-		if old_exp.Unix() == key_exp.Unix() && pgpkey_id == key_id {
-			continue
-		}
-
 		if verbose {
 			fmt.Printf("  Old Expiry: %s (%d)\n", old_exp, old_exp.Unix())
 			fmt.Printf("  New Expiry: %s (%d)\n", key_exp, key_exp.Unix())
+		}
+
+		// No changes?
+		if old_exp.Unix() == key_exp.Unix() && pgpkey_id == key_id {
+			continue
 		}
 
 		if apply {
